@@ -16,7 +16,7 @@ namespace slc {
         {
             std::cout << "Loading vocabulary from " << vocabulary_path << std::endl;
             vocab_.reset(new Surf64Vocabulary(vocabulary_path));
-            std::cout << "Loaded vocabulary." << std::endl;
+            std::cout << "Loaded vocabulary with " << vocab_->size() << " visual words." << std::endl;
         }
 
         void extract_surf(const cv::Mat & img, std::vector<cv::KeyPoint>& keys, std::vector<std::vector<float>>& descriptors) {
