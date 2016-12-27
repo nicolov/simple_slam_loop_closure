@@ -12,6 +12,10 @@ For testing, I've used the New College dataset published alongside FAB-MAP. It's
 
 The cmake build script downloads and build the [DBoW2 library](https://github.com/dorian3d/DBoW2) that's used for the bag of words representation.
 
+## Compatibility
+
+Only tested on Ubuntu 16.04 LTS with OpenCV3, gcc 5.4.0
+
 ## Plotting the confusion matrix
 
 The `ground_truth_comparison.py` plots and compares the loop closures from the ground truth to the actual results from the code.
