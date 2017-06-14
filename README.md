@@ -1,6 +1,6 @@
 # Simple loop closure for Visual SLAM
 
-Possibily the simplest example of loop closure for Visual SLAM.
+Possibily the simplest example of loop closure for Visual SLAM. More information [on my blog](http://nicolovaligi.com/bag-of-words-loop-closure-visual-slam.html).
 
 As I'm experimenting with alternative approaches for SLAM loop closure, I wanted a baseline that was reasonably close to state-of-the art approaches. The approach here is pretty similar to ORB-SLAM's, and uses SURF descriptors and *bag of words* to translate them to a global image description vector.
 
