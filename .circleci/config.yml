@@ -6,7 +6,13 @@ jobs:
       - image: nicolov/simple_slam_loop_closure:0.0.1
     steps:
       - checkout
-      - run: git -c lfs.concurrenttransfers=16 lfs pull
+      - run:
+          name: pull from git lfs
+          command: |
+            mkdir -p ~/.ssh
+            ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+            ssh git@github.com git-lfs-authenticate "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" download
+            git -c lfs.concurrenttransfers=16 lfs pull
       - run:
           name: build
           command: .circleci/build.sh
