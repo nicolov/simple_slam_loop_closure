@@ -7,12 +7,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: pull from git lfs
-          command: |
-            mkdir -p ~/.ssh
-            ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-            ssh git@github.com git-lfs-authenticate "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" download
-            git -c lfs.concurrenttransfers=16 lfs pull
+          name: download data files
+          command: scripts/download_data.sh
       - run:
           name: build
           command: .circleci/build.sh
