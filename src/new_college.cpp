@@ -17,7 +17,7 @@ using namespace slc;
 
 int main(int argc, char* argv[]) {
     if (argc < 3) {
-        cerr << "Usage " << argv[0] << " [path_to_vocabulary] [path_to_IJRR_2008_images]" << endl;
+        cerr << "Usage " << argv[0] << " [path_to_vocabulary] [path to images]" << endl;
         exit(1);
     }
 
@@ -25,14 +25,14 @@ int main(int argc, char* argv[]) {
     FrameDescriptor descriptor(vocabulary_path);
 
     string dataset_folder(argv[2]);
-    auto filenames = load_filenames(dataset_folder);
+    const auto filenames = load_filenames(dataset_folder);
     std::cout << "Processing " << filenames.size() << " images\n";
 
     // Will hold BoW representations for each frame
     vector<DBoW2::BowVector> bow_vecs;
 
     for (unsigned int img_i = 0; img_i < filenames.size(); img_i++) {
-        auto img_filename = dataset_folder + "/" + filenames[img_i];
+        auto img_filename = dataset_folder + "/Images/" + filenames[img_i];
         auto img = cv::imread(img_filename);
 
         cout << img_filename << endl;
