@@ -1,0 +1,20 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: nicolov/simple_slam_loop_closure:0.0.1
+    steps:
+      - checkout
+      - run:
+        name: build
+        command: .circleci/build.sh
+      - run:
+        name: test
+        command: ./build/new_college ./data/brief_k10L6.voc.gz ./data
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
