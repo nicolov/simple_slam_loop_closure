@@ -11,7 +11,7 @@ jobs:
           command: scripts/download_data.sh
       - run:
           name: build
-          command: .circleci/build.sh
+          command: scripts/build.sh
       - run:
           name: test
           command: ./build/new_college ./data/brief_k10L6.voc.gz ./data

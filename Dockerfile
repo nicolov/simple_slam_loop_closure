@@ -51,3 +51,7 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz \
 && make -j$(nproc) \
 && make install \
 && rm -rf /tmp/opencv-build
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        unzip
