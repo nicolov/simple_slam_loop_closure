@@ -51,3 +51,10 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz \
 && make -j$(nproc) \
 && make install \
 && rm -rf /tmp/opencv-build
+
+# git LFS
+RUN apt-get update \
+  && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
+  && apt-get update \
+  && apt-get install -y git-lfs openssh-client \
+  && git lfs install --system

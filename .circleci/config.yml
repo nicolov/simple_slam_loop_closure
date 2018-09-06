@@ -6,6 +6,7 @@ jobs:
       - image: nicolov/simple_slam_loop_closure:0.0.1
     steps:
       - checkout
+      - run: git lfs pull
       - run:
           name: build
           command: .circleci/build.sh
