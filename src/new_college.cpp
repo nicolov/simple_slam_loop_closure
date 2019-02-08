@@ -11,34 +11,32 @@
 #include "frame_descriptor.h"
 #include "utils.h"
 
-using namespace std;
-using namespace slc;
-
 int main(int argc, char* argv[]) {
-  if (argc < 3) {
-    cerr << "Usage " << argv[0] << " [path_to_vocabulary] [path to images]"
-         << endl;
+  std::string vocabulary_path("data/surf64_k10L6.voc.gz");
+  slc::FrameDescriptor descriptor(vocabulary_path);
+
+  std::string dataset_folder("data");
+  const auto filenames = load_filenames(dataset_folder);
+
+  if (filenames.size() == 0) {
+    std::cerr << "No images found in " << dataset_folder << "\n";
     exit(1);
   }
 
-  string vocabulary_path(argv[1]);
-  FrameDescriptor descriptor(vocabulary_path);
-
-  string dataset_folder(argv[2]);
-  const auto filenames = load_filenames(dataset_folder);
-  std::cout << "Processing " << filenames.size() << " images\n";
+  std::cerr << "Processing " << filenames.size() << " images\n";
 
   // Will hold BoW representations for each frame
-  vector<DBoW2::BowVector> bow_vecs;
+  std::vector<DBoW2::BowVector> bow_vecs;
+  bow_vecs.reserve(filenames.size());
 
   for (unsigned int img_i = 0; img_i < filenames.size(); img_i++) {
     auto img_filename = dataset_folder + "/Images/" + filenames[img_i];
     auto img = cv::imread(img_filename);
 
-    cout << img_filename << endl;
+    std::cerr << img_filename << "\n";
 
     if (img.empty()) {
-      cerr << endl << "Failed to load: " << img_filename << endl;
+      std::cerr << std::endl << "Failed to load: " << img_filename << std::endl;
       exit(1);
     }
 
@@ -48,11 +46,15 @@ int main(int argc, char* argv[]) {
     bow_vecs.push_back(bow_vec);
   }
 
-  cout << "Writing output..." << endl;
+  std::cerr << "\nWriting output...\n";
 
-  ofstream of;
-  of.open(getenv("HOME") +
-          string("/dev/simple_slam_loop_closure/out/confusion_matrix.txt"));
+  std::string output_path("out/confusion_matrix.txt");
+  std::ofstream of;
+  of.open(output_path);
+  if (of.fail()) {
+    std::cerr << "Failed to open output file " << output_path << std::endl;
+    exit(1);
+  }
 
   // Compute confusion matrix
   // i.e. the (i, j) element of the matrix contains the distance
@@ -65,5 +67,5 @@ int main(int argc, char* argv[]) {
   }
 
   of.close();
-  cout << "Output done" << endl;
+  std::cerr << "Output done\n";
 }

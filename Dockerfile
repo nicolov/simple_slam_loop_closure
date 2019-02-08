@@ -54,4 +54,9 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz \
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+        python3 \
+        python3-pip \
         unzip
+
+COPY requirements.txt /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt

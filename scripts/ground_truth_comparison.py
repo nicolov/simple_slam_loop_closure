@@ -1,25 +1,23 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
+import argparse
 import os
 import sys
-from IPython import embed
 
 import matplotlib
-matplotlib.use('GTKAgg')
-
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 import scipy.io as sio
 import numpy as np
 
-GROUND_TRUTH_PATH = os.path.expanduser(
-    '~/bags/IJRR_2008_Dataset/Data/NewCollege/masks/NewCollegeGroundTruth.mat')
-
-WORK_FOLDER = os.path.expanduser(
-    '~/dev/simple_slam_loop_closure/out/')
-
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--gt-path',
+                        default='data/NewCollegeGroundTruth.mat')
+    parser.add_argument('--eval-path',
+                        default='out/confusion_matrix.txt')
+    args = parser.parse_args()
 
     default_heatmap_kwargs = dict(
         xticklabels=False,
@@ -30,15 +28,14 @@ if __name__ == "__main__":
     fig, (ax1, ax2) = plt.subplots(ncols=2)
 
     # Plot the ground truth
-    gt_data = sio.loadmat(GROUND_TRUTH_PATH)['truth']
+    gt_data = sio.loadmat(args.gt_path)['truth']
     sns.heatmap(gt_data[::2, ::2],
         ax=ax1,
         **default_heatmap_kwargs)
     ax1.set_title('Ground truth')
 
     # Plot the BoW results
-    bow_data = np.loadtxt(os.path.join(
-        WORK_FOLDER, 'confusion_matrix.txt'))
+    bow_data = np.loadtxt(args.eval_path)
     # Take the lower triangle only
     bow_data = np.tril(bow_data, 0)
     sns.heatmap(bow_data,
@@ -49,6 +46,4 @@ if __name__ == "__main__":
 
     # plt.show()
     plt.tight_layout()
-    plt.savefig(os.path.join(
-        WORK_FOLDER, 'confusion_matrix.png'),
-        bbox_inches='tight')
+    plt.savefig(args.eval_path.replace('.txt', '.png'), bbox_inches='tight')
