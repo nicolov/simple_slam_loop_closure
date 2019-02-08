@@ -5,8 +5,7 @@
 <img src="https://github.com/nicolov/simple_slam_loop_closure/raw/master/confusion_matrix_example.png" width="500" style="text-align: center"/>
 
 Possibily the simplest example of loop closure for Visual SLAM. More
-information [on my blog](http://nicolovaligi.com/bag-of-words-loop-closure-
-visual-slam.html).
+information [on my blog](http://nicolovaligi.com/bag-of-words-loop-closure-visual-slam.html).
 
 As I'm experimenting with alternative approaches for SLAM loop closure, I
 wanted a baseline that was reasonably close to state-of-the art approaches.
