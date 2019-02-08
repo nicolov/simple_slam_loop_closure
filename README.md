@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/nicolov/simple_slam_loop_closure.svg?style=shield)](https://circleci.com/gh/nicolov/simple_slam_loop_closure)
 
-<img src="https://github.com/nicolov/simple_slam_loop_closure/raw/master/out/confusion_matrix.png" width="500" style="text-align: center"/>
+<img src="https://github.com/nicolov/simple_slam_loop_closure/raw/master/confusion_matrix_example.png" width="500" style="text-align: center"/>
 
 Possibily the simplest example of loop closure for Visual SLAM. More
 information [on my blog](http://nicolovaligi.com/bag-of-words-loop-closure-
